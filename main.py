@@ -30,16 +30,40 @@ def lcsDist(X, Y):
 
 def carregaCompare():
 
-    pathEk  = "data/ekman/Ekman_All.csv"
+    ausTag = ['AU01', 'AU02', 'AU04', 'AU05', 'AU06', 'AU07', 'AU09', 'AU10', 'AU12', 'AU14', 'AU15', 'AU17', 'AU20', 'AU23', 'AU25', 'AU26', 'AU28', 'AU45']
 
-    ek      = pd.read_csv(pathEk)
-    destino = pathEk + "LCS"
+    pathEk  = "data/ekman/Ekman_All.csv"
+    dataek  = pd.read_csv(pathEk)
     
+    ## Ekman Faces
+    ausEk = dataek.iloc[:,1:17].values
+    emoEk = dataek.iloc[0:,0].values
+
+    ## Faces to Compare
+    entries = os.listdir('data/output/')
+    for ent in entries:
+        
+        if '.gitkeep' not in ent:
+
+            fileEnt = os.listdir('data/output/' + ent)            
+            for fEnt in fileEnt:
+                
+                dataComp = pd.read_csv('data/output/' + ent + '/' + fEnt)
+                
+                ausCompValues = dataComp.iloc[:, 676:693].values
+                ausCompTag = dataComp.iloc[:, 694:711].values
+                
+                break 
+
+            break
+
+    exit()
+
+
     spotaneous = pd.read_table("values_aus.csv",sep=";")
     spont = spotaneous.values
     
-    ausEk = ek.iloc[:,1:17].values
-    emoEk = ek.iloc[0:,0].values
+    
     
     lcs = pd.read_teable("notes_aus.csv",error_bad_lines=False)
         

@@ -40,7 +40,6 @@ def createFileVideo():
 
     entries = os.listdir('./video/')
 
-    print(entries)
     for ent in entries:
 
         try:
