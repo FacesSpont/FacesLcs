@@ -38,6 +38,6 @@ def createFile():
 
 if __name__ == '__main__':
 
-    path = 'D:\\PythonProjects\\LCS_code\\'
+    path = 'D:\\PythonProjects\\FacesLcs\\'
 
     createFile()
