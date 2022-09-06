@@ -52,29 +52,32 @@ def carregaCompare():
 
             fileEnt = os.listdir('data/output/' + ent)            
             for fEnt in fileEnt:
-                
-                nome = fEnt.split('.')[0]
-                dataComp = pd.read_csv('data/output/' + ent + '/' + fEnt)
-                
-                ausCompValues = dataComp.iloc[:, 676:693].values
-                ausCompTag = dataComp.iloc[:, 694:711].values
 
-                ausTagFinal = []
-                for i, v in enumerate(ausCompTag[0]):                    
-                    if '1.0' in str(v):
-                        ausTagFinal.append(ausTag[i])
-                         
-                compareLcs[nome] = ausTagFinal
-                
-                break 
+                try:
 
-            break
+                    nome = fEnt.split('.')[0]
+                    if 'csv' in fEnt.split('.')[1]:
 
-    # print(compareLcs)
+                        dataComp = pd.read_csv('data/output/' + ent + '/' + fEnt)
+                        
+                        ausCompValues = dataComp.iloc[:, 676:693].values
+                        ausCompTag = dataComp.iloc[:, 694:711].values
+
+                        ausTagFinal = []
+                        for i, v in enumerate(ausCompTag[0]):                    
+                            if '1.0' in str(v):
+                                ausTagFinal.append(ausTag[i])
+                                
+                        compareLcs[nome] = ausTagFinal
+
+                except IndexError:
+                    pass
+
     aus = allFace()
     f = 0
 
     for frame in compareLcs:
+        print(compareLcs[frame])
         auPresente=str(compareLcs[frame])
         out=""
         menorLcs=200
@@ -88,11 +91,13 @@ def carregaCompare():
                 menorLcs=dist
                 emoLcs=[emotion]
 
-    out+=frame+" "#+str(emoLcs)
+    
+    out+=frame+" "+str(emoLcs)
+    print(out, 'aqui')
     print('###############################################################################')
     print(frame, emoLcs)
     # print('AUS presentes', auPresente)
-
+    exit()
     if(len(emoLcs)>0):
         menor=200 
         for i in emoLcs:
@@ -101,14 +106,15 @@ def carregaCompare():
                 if(i[:-1]==j):
 
                     compare=ausCompValues[0][f]
-                    
                         
                     distance = np.linalg.norm(ausEk[c] - compare)
                     print('Distance Euclidean -', "%.2f" %distance,";",j)
                     if(distance<menor):
                         menor=distance
                         m=j
+
                 c+=1
+
         auPresente=auPresente.replace("["," ")
         auPresente=auPresente.replace("]"," ")
         auPresente=auPresente.replace("'","")
