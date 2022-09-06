@@ -75,7 +75,7 @@ def carregaCompare():
 
     aus = allFace()
     f = 0
-
+    
     for frame in compareLcs:
         print(compareLcs[frame])
         auPresente=str(compareLcs[frame])
