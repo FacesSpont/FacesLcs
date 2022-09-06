@@ -66,6 +66,7 @@ def allFace():
 def dividedFace():
 
     aus_upper = {
+
         "ANGERa" : ["AU04","AU05","AU07"],
         "ANGERb" : ["AU04","AU05"],
         "ANGERc" : ["AU04","AU07"],
@@ -97,6 +98,7 @@ def dividedFace():
     }
 
     aus_lower = {
+        
         "ANGERd" : ["AU10","AU22","AU23"],
         "ANGERe" : ["AU10","AU23","AU25"],
         "ANGERf" : ["AU10","AU23","AU26"],

@@ -33,18 +33,18 @@ def carregaCompare(n):
     # pathGlobal = "D:/PythonProjects/proj_faces/"
 
     #MUDAR PATH#
-    pathEk  = "Ekman_All.csv"
+    pathEk  = "./data/ekman/Ekman_All.csv"
 
     ek      = pd.read_csv(pathEk)
     destino = pathEk + "LCS"
     
-    spotaneous = pd.read_table("values_aus.csv",sep=";")
+    spotaneous = pd.read_table("./data/old/values_aus.csv",sep=";")
     spont = spotaneous.values
     
     ausEk = ek.iloc[:,1:17].values
     emoEk = ek.iloc[0:,0].values
     
-    lcs = pd.read_table("notes_aus.csv",error_bad_lines=False)
+    lcs = pd.read_table("./data/old/notes_aus.csv",error_bad_lines=False)
         
     frames = lcs.values
     compareLcs = {}
