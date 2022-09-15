@@ -68,64 +68,67 @@ def carregaCompare():
                             if '1.0' in str(v):
                                 ausTagFinal.append(ausTag[i])
                                 
-                        compareLcs[nome] = ausTagFinal
+                        compareLcs[nome] = ausTagFinal                
+
+                    aus = allFace()
+                    f = 0
+                    
+                    for frame in compareLcs:
+                        # print(compareLcs[frame])
+                        auPresente=str(compareLcs[frame])
+                        out = ""
+                        menorLcs=200
+                        emoLcs=[]
+                        for emotion in aus:
+                            dist=lcsDist(aus[emotion],compareLcs[frame])
+                            # print(dist)
+                            if(dist==menorLcs):
+                                emoLcs.append(emotion)
+                            if(dist<menorLcs):
+                                menorLcs=dist
+                                emoLcs=[emotion]
+
+                    
+                    out += "IMAGE: " + frame + " #### Emotions Compound: " + str(emoLcs) + " #### "
+                    # print(out, 'aqui')
+                    # print('###############################################################################')
+                    # print(frame, emoLcs)
+                    # print('AUS presentes', auPresente)
+                    # exit()
+                    if(len(emoLcs)>0):
+                        menor=200 
+                        for i in emoLcs:
+                            c=0
+                            for j in emoEk:  
+                                if(i[:-1]==j):
+
+                                    compare=ausCompValues[0][f]
+                                        
+                                    distance = np.linalg.norm(ausEk[c] - compare)
+                                    # print('Distance Euclidean -', "%.2f" %distance,";",j)
+                                    if(distance<menor):
+                                        menor=distance
+                                        m=j
+
+                                c+=1
+
+                        auPresente=auPresente.replace("["," ")
+                        auPresente=auPresente.replace("]"," ")
+                        auPresente=auPresente.replace("'","")
+                        auPresente=auPresente.replace(" ","")
+                        auPresente=auPresente.replace(",,",";")
+                        out += 'Emotion Tagged: ' + m + " #### AUS presence: " + auPresente.replace(",",";")
+                        # print(out)
+                        # print('-------------')
+                        # break
+
+                    f += 1
+                    print(out) 
+
+                    # break
 
                 except IndexError:
                     pass
-
-    aus = allFace()
-    f = 0
-    
-    for frame in compareLcs:
-        print(compareLcs[frame])
-        auPresente=str(compareLcs[frame])
-        out=""
-        menorLcs=200
-        emoLcs=[]
-        for emotion in aus:
-            dist=lcsDist(aus[emotion],compareLcs[frame])
-            # print(dist)
-            if(dist==menorLcs):
-                emoLcs.append(emotion)
-            if(dist<menorLcs):
-                menorLcs=dist
-                emoLcs=[emotion]
-
-    
-    out+=frame+" "+str(emoLcs)
-    print(out, 'aqui')
-    print('###############################################################################')
-    print(frame, emoLcs)
-    # print('AUS presentes', auPresente)
-    exit()
-    if(len(emoLcs)>0):
-        menor=200 
-        for i in emoLcs:
-            c=0
-            for j in emoEk:  
-                if(i[:-1]==j):
-
-                    compare=ausCompValues[0][f]
-                        
-                    distance = np.linalg.norm(ausEk[c] - compare)
-                    print('Distance Euclidean -', "%.2f" %distance,";",j)
-                    if(distance<menor):
-                        menor=distance
-                        m=j
-
-                c+=1
-
-        auPresente=auPresente.replace("["," ")
-        auPresente=auPresente.replace("]"," ")
-        auPresente=auPresente.replace("'","")
-        auPresente=auPresente.replace(" ","")
-        auPresente=auPresente.replace(",,",";")
-        out+=m+";"+nome+";"+auPresente.replace(",",";")
-        # print(out)
-        # print('-------------')
-        # break
-    f +=1
-    # print(out) 
 
 if __name__ == '__main__':
 
