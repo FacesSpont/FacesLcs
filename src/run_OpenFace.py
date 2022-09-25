@@ -71,6 +71,6 @@ if __name__ == '__main__':
 
     path = 'D:\\PythonProjects\\FacesLcs\\'
 
-    # createFile()
+    createFile()
 
-    createFileVideo()
+    # createFileVideo()

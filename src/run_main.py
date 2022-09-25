@@ -8,6 +8,11 @@ import csv
 from run_dict import allFace
 from run_dict import dividedFace
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 def lcsDist(X, Y):
 
     # Find LCS
@@ -45,12 +50,18 @@ def carregaCompare():
     emoEk = dataek.iloc[0:,0].values
 
     ## Faces to Compare
-    entries = os.listdir('data/output/')
+    entries = os.listdir('data/happiness/')
     for ent in entries:
         
         if '.gitkeep' not in ent:
 
-            fileEnt = os.listdir('data/output/' + ent)            
+            print(ent)
+
+            au6 = []
+            au12 = []
+            auConj = []
+
+            fileEnt = os.listdir('data/happiness/' + ent)            
             for fEnt in fileEnt:
 
                 try:
@@ -58,10 +69,20 @@ def carregaCompare():
                     nome = fEnt.split('.')[0]
                     if 'csv' in fEnt.split('.')[1]:
 
-                        dataComp = pd.read_csv('data/output/' + ent + '/' + fEnt)
+                        dataComp = pd.read_csv('data/happiness/' + ent + '/' + fEnt)
                         
                         ausCompValues = dataComp.iloc[:, 676:693].values
                         ausCompTag = dataComp.iloc[:, 694:711].values
+
+                        au6.append(dataComp.iloc[:, 681].values[0])
+                        au12.append(dataComp.iloc[:, 685].values[0])
+
+                        v6 = int(dataComp.iloc[:, 681].values[0])
+                        v12 = int(dataComp.iloc[:, 685].values[0])
+
+                        soma = (v6 + v12) / 2
+
+                        auConj.append(soma)
 
                         ausTagFinal = []
                         for i, v in enumerate(ausCompTag[0]):                    
@@ -89,12 +110,9 @@ def carregaCompare():
                                 emoLcs=[emotion]
 
                     
-                    out += "IMAGE: " + frame + " #### Emotions Compound: " + str(emoLcs) + " #### "
-                    # print(out, 'aqui')
-                    # print('###############################################################################')
-                    # print(frame, emoLcs)
-                    # print('AUS presentes', auPresente)
-                    # exit()
+                    out += ent + " #### IMAGE: " + frame + " #### Emotions Compound: " + str(emoLcs) + " #### "
+                    
+                    # print('###############################################################################')                    
                     if(len(emoLcs)>0):
                         menor=200 
                         for i in emoLcs:
@@ -118,17 +136,36 @@ def carregaCompare():
                         auPresente=auPresente.replace(" ","")
                         auPresente=auPresente.replace(",,",";")
                         out += 'Emotion Tagged: ' + m + " #### AUS presence: " + auPresente.replace(",",";")
-                        # print(out)
-                        # print('-------------')
+                        
                         # break
 
                     f += 1
-                    print(out) 
+                    # print(out) 
 
                     # break
 
                 except IndexError:
                     pass
+
+            getHappiness(au6, au12, auConj, ent)
+
+            # break
+
+
+def getHappiness(au6, au12, auConj, imgDataset):
+    
+    box_plot_data=[au6,au12,auConj]
+
+    plt.boxplot(box_plot_data,labels=['AU6','AU12','AU6+AU12'])
+    
+    plt.ylim([0,5])
+
+    plt.savefig('charts/'+ imgDataset + '_Happy.png' )    
+
+    plt.clf()
+    plt.close()
+
+    return 'ok'
 
 if __name__ == '__main__':
 
