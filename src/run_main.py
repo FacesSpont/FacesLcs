@@ -55,8 +55,6 @@ def carregaCompare():
         
         if '.gitkeep' not in ent:
 
-            print(ent)
-
             au6 = []
             au12 = []
             auConj = []
@@ -154,6 +152,44 @@ def carregaCompare():
 
 def getHappiness(au6, au12, auConj, imgDataset):
     
+
+    mau6 = np.mean(au6)
+    mau12 = np.mean(au12)
+    mall = np.mean(auConj)
+
+    sau6 = np.std(au6)
+    sau12 = np.std(au12)
+    sall = np.std(auConj)
+    
+    CTEs = [mau6, mau12, mall]
+    error = [sau6, sau12, sall]
+
+    materials = ['AU6', 'AU12', 'AU6+AU12']
+    x_pos = np.arange(len(materials))
+
+    # Build the plot
+    fig, ax = plt.subplots()
+    ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
+    ax.set_ylabel('AUs Intensity Meam')
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(materials)
+    ax.set_title("Happiness' AU " + imgDataset)
+    ax.yaxis.grid(True)
+
+    plt.ylim([0,3.5])
+
+    # Save the figure and show
+    plt.tight_layout()
+    plt.savefig('charts/barplot_' + imgDataset + '_Happy.png')
+    # plt.show()
+
+    plt.clf()
+    plt.close()    
+
+    return 'ok'
+
+def boxPlotChart(au6,au12,auConj,imgDataset):
+    
     box_plot_data=[au6,au12,auConj]
 
     plt.boxplot(box_plot_data,labels=['AU6','AU12','AU6+AU12'])
@@ -164,8 +200,6 @@ def getHappiness(au6, au12, auConj, imgDataset):
 
     plt.clf()
     plt.close()
-
-    return 'ok'
 
 if __name__ == '__main__':
 
