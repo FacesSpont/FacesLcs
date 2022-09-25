@@ -167,20 +167,24 @@ def getHappiness(au6, au12, auConj, imgDataset):
     materials = ['AU6', 'AU12', 'AU6+AU12']
     x_pos = np.arange(len(materials))
 
+    c = ["#36454F", "#A9A9A9", "#B2BEB5"]
+
     # Build the plot
     fig, ax = plt.subplots()
-    ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', capsize=10)
+    ax.bar(x_pos, CTEs, yerr=error, align='center', alpha=0.5, ecolor='black', color=c, capsize=10)
     ax.set_ylabel('AUs Intensity Meam')
     ax.set_xticks(x_pos)
     ax.set_xticklabels(materials)
     ax.set_title("Happiness' AU " + imgDataset)
-    ax.yaxis.grid(True)
+    # ax.yaxis.grid(True)
 
     plt.ylim([0,3.5])
+    # plt.axis('off')
 
     # Save the figure and show
     plt.tight_layout()
     plt.savefig('charts/barplot_' + imgDataset + '_Happy.png')
+    
     # plt.show()
 
     plt.clf()
