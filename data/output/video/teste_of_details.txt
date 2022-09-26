@@ -1,0 +1,13 @@
+Input:D:\PythonProjects\FacesLcs\video\teste.mp4
+Input full path:D:\PythonProjects\FacesLcs\video\teste.mp4
+Camera parameters:250,250,160,120
+Output HOG:teste.hog
+Output video:teste.avi
+Output aligned directory:teste_aligned
+Output csv:teste.csv
+Gaze: 1
+AUs: 1
+Landmarks 2D: 1
+Landmarks 3D: 1
+Pose: 1
+Shape parameters: 1

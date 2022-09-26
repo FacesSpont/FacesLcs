@@ -56,7 +56,10 @@ def carregaCompare():
         if '.gitkeep' not in ent:
 
             au6 = []
+            au7 = []
             au12 = []
+            au25 = []
+            au26 = []
             auConj = []
 
             fileEnt = os.listdir('data/happiness/' + ent)            
@@ -73,12 +76,22 @@ def carregaCompare():
                         ausCompTag = dataComp.iloc[:, 694:711].values
 
                         au6.append(dataComp.iloc[:, 681].values[0])
+                        au7.append(dataComp.iloc[:, 682].values[0])
+
                         au12.append(dataComp.iloc[:, 685].values[0])
+                        
+                        au25.append(dataComp.iloc[:, 691].values[0])
+                        au26.append(dataComp.iloc[:, 692].values[0])
 
                         v6 = int(dataComp.iloc[:, 681].values[0])
-                        v12 = int(dataComp.iloc[:, 685].values[0])
+                        v7 = int(dataComp.iloc[:, 682].values[0])
 
-                        soma = (v6 + v12) / 2
+                        v12 = int(dataComp.iloc[:, 685].values[0])
+                        
+                        v25 = int(dataComp.iloc[:, 691].values[0])
+                        v26 = int(dataComp.iloc[:, 692].values[0])
+
+                        soma = (v6 + v12 + v7 + v25 + v26) / 5
 
                         auConj.append(soma)
 
@@ -145,29 +158,37 @@ def carregaCompare():
                 except IndexError:
                     pass
 
-            getHappiness(au6, au12, auConj, ent)
+            getHappiness(au6, au7, au12, au25, au26, auConj, ent)
 
             # break
 
 
-def getHappiness(au6, au12, auConj, imgDataset):
+def getHappiness(au6, au7, au12, au25, au26, auConj, imgDataset):
     
 
     mau6 = np.mean(au6)
+    mau7 = np.mean(au7)
     mau12 = np.mean(au12)
+    mau25 = np.mean(au25)
+    mau26 = np.mean(au26)
+    
     mall = np.mean(auConj)
 
     sau6 = np.std(au6)
+    sau7 = np.std(au7)
     sau12 = np.std(au12)
+    sau25 = np.std(au25)
+    sau26 = np.std(au26)
+
     sall = np.std(auConj)
     
-    CTEs = [mau6, mau12, mall]
-    error = [sau6, sau12, sall]
+    CTEs = [mau6, mau7, mau12, mau25, mau26, mall]
+    error = [sau6, sau7, sau12, sau25, sau26, sall]
 
-    materials = ['AU6', 'AU12', 'AU6+AU12']
+    materials = ['AU6', 'AU7', 'AU12', 'AU25', 'AU26', 'All AUs']
     x_pos = np.arange(len(materials))
 
-    c = ["#36454F", "#A9A9A9", "#B2BEB5"]
+    c = ["#B2BEB5", "#7393B3", "#36454F", "#A9A9A9", "#6082B6", "#808080"]
 
     # Build the plot
     fig, ax = plt.subplots()
