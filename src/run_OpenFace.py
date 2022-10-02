@@ -11,30 +11,32 @@ def createFile():
 
     for ent in entries:
 
-        try:
-            if not os.path.exists('./data/output/' + ent):
-                os.makedirs('./data/output/' + ent)
-        except OSError:
-            print('Error: Creating directory of data')
+        if 'CGMen' in ent or 'CGWomen' in ent:
 
-        exec1 = path + 'img\\' + ent
-        exec2 = path + 'data\\output\\' + ent
+            try:
+                if not os.path.exists('./data/output/' + ent):
+                    os.makedirs('./data/output/' + ent)
+            except OSError:
+                print('Error: Creating directory of data')
 
-        comando = ' -fdir ' + '"' +  exec1 + '"'
+            exec1 = path + 'img\\' + ent
+            exec2 = path + 'data\\output\\' + ent
 
-        os.system('"C:\\OpenFace\\FaceLandmarkImg.exe' + comando + ' -out_dir ' + exec2 + '"')
+            comando = ' -fdir ' + '"' +  exec1 + '"'
 
-        ## Remove arquivos gerados pelos OpenFace
-        excluir = os.listdir('./data/output/' + ent)
-        for e in excluir:
+            os.system('"C:\\OpenFace\\FaceLandmarkImg.exe' + comando + ' -out_dir ' + exec2 + '"')
 
-            listas = e.split('.')
+            ## Remove arquivos gerados pelos OpenFace
+            excluir = os.listdir('./data/output/' + ent)
+            for e in excluir:
 
-            try:                
-                if 'csv' not in listas[1]:
-                    os.remove('./data/output/' + ent + '/' + e)
-            except IndexError:
-                shutil.rmtree('./data/output/' + ent + '/' + e, ignore_errors=True)
+                listas = e.split('.')
+
+                try:                
+                    if 'csv' not in listas[1]:
+                        os.remove('./data/output/' + ent + '/' + e)
+                except IndexError:
+                    shutil.rmtree('./data/output/' + ent + '/' + e, ignore_errors=True)
 
 def createFileVideo():
 
