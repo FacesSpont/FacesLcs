@@ -175,23 +175,23 @@ def carregaCompare():
 
             # break
 
-    # getHappiness(men6, legendaMen, 'AU6', 'Men')
-    # getHappiness(men12, legendaMen, 'AU12', 'Men')
+    getHappiness(men6, legendaMen, 'AU6', 'Men')
+    getHappiness(men12, legendaMen, 'AU12', 'Men')
     
-    # getHappiness(women6, legendaWomen, 'AU6', 'Women')
-    # getHappiness(women12, legendaWomen, 'AU12', 'Women')
+    getHappiness(women6, legendaWomen, 'AU6', 'Women')
+    getHappiness(women12, legendaWomen, 'AU12', 'Women')
 
-    # getHappiness(menAll, legendaMen, 'AU6+AU12', 'Men')
-    # getHappiness(womenAll, legendaWomen, 'AU6+AU12', 'Women')
+    getHappiness(menAll, legendaMen, 'AU6+AU12', 'Men')
+    getHappiness(womenAll, legendaWomen, 'AU6+AU12', 'Women')
 
-    getAnova(men6, legendaMen, 'AU6', 'Men')
-    getAnova(men12, legendaMen, 'AU12', 'Men')
+    # getAnova(men6, legendaMen, 'AU6', 'Men')
+    # getAnova(men12, legendaMen, 'AU12', 'Men')
 
-    getAnova(women6, legendaWomen, 'AU6', 'Women')
-    getAnova(women12, legendaWomen, 'AU12', 'Women')
+    # getAnova(women6, legendaWomen, 'AU6', 'Women')
+    # getAnova(women12, legendaWomen, 'AU12', 'Women')
 
-    getAnova(menAll, legendaMen, 'AU6+AU12', 'Men')
-    getAnova(womenAll, legendaWomen, 'AU6+AU12', 'Women')
+    # getAnova(menAll, legendaMen, 'AU6+AU12', 'Men')
+    # getAnova(womenAll, legendaWomen, 'AU6+AU12', 'Women')
 
     # print(men6)
     # print(men12)
@@ -204,16 +204,21 @@ def getAnova(total, legendaMen, tipo, gender):
 def getHappiness(total, legendaMen, tipo, gender):
 
 
-    m1 = np.mean(total[0])
-    m2 = np.mean(total[1])
-    m3 = np.mean(total[2])
+    m1 = np.median(total[0])
+    m2 = np.median(total[1])
+    m3 = np.median(total[2])
+
+    vr1 = np.var(total[0])
+    vr2 = np.var(total[1])
+    vr3 = np.var(total[2])
     
     s1 = np.std(total[0])
     s2 = np.std(total[1])
     s3 = np.std(total[2])
 
-    print('MEAN ', m1, m2, m3, tipo, gender, legendaMen)
-    print('STD ', s1, s2, s3, tipo, gender, legendaMen)
+    print('MEDIAN ', "%.3f" % m1, "%.3f" % m2, "%.3f" % m3, tipo, gender, legendaMen)
+    print('STD ', "%.3f" % s1, "%.3f" % s2, "%.3f" % s3, tipo, gender, legendaMen)
+    print('VARIANCE ', "%.3f" % vr1, "%.3f" % vr2, "%.3f" % vr3, tipo, gender, legendaMen)
     
     CTEs = [m1,m2,m3]
     error = [s1,s2,s3]
@@ -244,17 +249,24 @@ def getHappiness(total, legendaMen, tipo, gender):
     plt.clf()
     plt.close()    
 
-    # STD  0.9336078102719114 1.4885567070671435 1.2943103800866314 AU6 Men ['CDFMen', 'CGMen', 'SpontMen']
-    # MEAN  1.3699999999999999 1.3465517241379312 1.7044 AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
-    # STD  0.6674630301010867 0.6856875525619571 0.9465181667564548 AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
-    # MEAN  1.745438596491228 0.3941071428571429 1.0072222222222222 AU6 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
-    # STD  0.8258139422910227 0.4724812044096655 0.9627409110079383 AU6 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
-    # MEAN  1.7236842105263157 1.4869642857142853 1.38 AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
-    # STD  0.6940590792866024 0.5570423157908496 0.538041716680862 AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
-    # MEAN  1.1810344827586208 1.1551724137931034 1.23 AU6+AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
-    # STD  0.6207495181860238 0.8520102828004026 0.7156116265125938 AU6+AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
-    # MEAN  1.2543859649122806 0.5446428571428571 0.8055555555555556 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
-    # STD  0.5390277717802533 0.40396235806655784 0.5306936992928556 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # MEDIAN  1.830 1.690 1.565 AU6 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # STD  0.934 1.489 1.294 AU6 Men ['CDFMen', 'CGMen', 'SpontMen']     
+    # VARIANCE  0.872 2.216 1.675 AU6 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # MEDIAN  1.410 1.300 1.845 AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # STD  0.667 0.686 0.947 AU12 Men ['CDFMen', 'CGMen', 'SpontMen']     
+    # VARIANCE  0.446 0.470 0.896 AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # MEDIAN  1.770 0.105 0.815 AU6 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # STD  0.826 0.472 0.963 AU6 Women ['CDFWomen', 'CGWomen', 'SpontWomen']     
+    # VARIANCE  0.682 0.223 0.927 AU6 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # MEDIAN  1.780 1.485 1.440 AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # STD  0.694 0.557 0.538 AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']     
+    # VARIANCE  0.482 0.310 0.289 AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # MEDIAN  1.000 1.000 1.000 AU6+AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # STD  0.621 0.852 0.716 AU6+AU12 Men ['CDFMen', 'CGMen', 'SpontMen']     
+    # VARIANCE  0.385 0.726 0.512 AU6+AU12 Men ['CDFMen', 'CGMen', 'SpontMen']
+    # MEDIAN  1.500 0.500 1.000 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # STD  0.539 0.404 0.531 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
+    # VARIANCE  0.291 0.163 0.282 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
 
     return 'ok'
 
@@ -275,6 +287,6 @@ if __name__ == '__main__':
 
     carregaCompare()
 
-
+    # Mediana ao inves de (Media) e adicionar Variancia
     # faces de reais posadas e espont e CG (dataset e estranheza)
-    # diferença de aus, regiao, e genero.
+    # diferença de aus, regiao (face superior e face inferior), e genero.
