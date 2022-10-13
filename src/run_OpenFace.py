@@ -11,7 +11,7 @@ def createFile():
 
     for ent in entries:
 
-        if 'CGMen' in ent or 'CGWomen' in ent:
+        if 'CGGamesMen' in ent or 'CGGamesWomen' in ent:
 
             try:
                 if not os.path.exists('./data/output/' + ent):

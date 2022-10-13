@@ -203,25 +203,30 @@ def getAnova(total, legendaMen, tipo, gender):
 
 def getHappiness(total, legendaMen, tipo, gender):
 
+    # print(total, len(total))
+    # exit()
 
     m1 = np.median(total[0])
     m2 = np.median(total[1])
     m3 = np.median(total[2])
+    m4 = np.median(total[3])
 
     vr1 = np.var(total[0])
     vr2 = np.var(total[1])
     vr3 = np.var(total[2])
+    vr4 = np.var(total[3])
     
     s1 = np.std(total[0])
     s2 = np.std(total[1])
     s3 = np.std(total[2])
+    s4 = np.std(total[3])
 
     print('MEDIAN ', "%.3f" % m1, "%.3f" % m2, "%.3f" % m3, tipo, gender, legendaMen)
     print('STD ', "%.3f" % s1, "%.3f" % s2, "%.3f" % s3, tipo, gender, legendaMen)
     print('VARIANCE ', "%.3f" % vr1, "%.3f" % vr2, "%.3f" % vr3, tipo, gender, legendaMen)
     
-    CTEs = [m1,m2,m3]
-    error = [s1,s2,s3]
+    CTEs = [m1,m2,m3,m4]
+    error = [s1,s2,s3,s4]
 
     materials = legendaMen
     x_pos = np.arange(len(materials))
