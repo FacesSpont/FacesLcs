@@ -171,18 +171,83 @@ def carregaCompare():
                 womenAll.append(auConj)
                 legendaWomen.append(ent)
 
-            # getHappiness(au6, au12, auConj, ent)
-
             # break
 
-    getHappiness(men6, legendaMen, 'AU6', 'Men')
-    getHappiness(men12, legendaMen, 'AU12', 'Men')
     
-    getHappiness(women6, legendaWomen, 'AU6', 'Women')
-    getHappiness(women12, legendaWomen, 'AU12', 'Women')
+    with open('./extras/analyticsFull.csv', 'w', newline='', encoding='utf-8') as arquivo:
 
-    getHappiness(menAll, legendaMen, 'AU6+AU12', 'Men')
-    getHappiness(womenAll, legendaWomen, 'AU6+AU12', 'Women')
+        writer = csv.writer(arquivo, delimiter=';')
+
+        header = ['Dataset', 'Genero', 'AU', 'Mediana', 'Desvio Padrao', 'Variancia']
+        writer.writerow(header)
+
+        r1 = getHappiness(men6, legendaMen, 'AU6', 'Men')        
+        for i, v in enumerate(legendaMen):            
+            val = []
+            val.append(v)
+            val.append('Men')
+            val.append('AU6')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+
+        r1 = getHappiness(men12, legendaMen, 'AU12', 'Men')
+        for i, v in enumerate(legendaMen):            
+            val = []
+            val.append(v)
+            val.append('Men')
+            val.append('AU12')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+        
+        r1 = getHappiness(women6, legendaWomen, 'AU6', 'Women')
+        for i, v in enumerate(legendaWomen):            
+            val = []
+            val.append(v)
+            val.append('Women')
+            val.append('AU6')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+
+        r1 = getHappiness(women12, legendaWomen, 'AU12', 'Women')
+        for i, v in enumerate(legendaWomen):            
+            val = []
+            val.append(v)
+            val.append('Women')
+            val.append('AU12')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+
+        r1 = getHappiness(menAll, legendaMen, 'AU6+AU12', 'Men')
+        for i, v in enumerate(legendaWomen):            
+            val = []
+            val.append(v)
+            val.append('Men')
+            val.append('AU6+AU12')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+
+        r1 = getHappiness(womenAll, legendaWomen, 'AU6+AU12', 'Women')
+        for i, v in enumerate(legendaWomen):            
+            val = []
+            val.append(v)
+            val.append('Women')
+            val.append('AU6+AU12')
+            val.append("%.3f" % float(r1[0][i]))
+            val.append("%.3f" % float(r1[2][i]))
+            val.append("%.3f" % float(r1[1][i]))
+            writer.writerow(val)
+
+        # print(r1)
 
     # getAnova(men6, legendaMen, 'AU6', 'Men')
     # getAnova(men12, legendaMen, 'AU12', 'Men')
@@ -221,9 +286,9 @@ def getHappiness(total, legendaMen, tipo, gender):
     s3 = np.std(total[2])
     s4 = np.std(total[3])
 
-    print('MEDIAN ', "%.3f" % m1, "%.3f" % m2, "%.3f" % m3, tipo, gender, legendaMen)
-    print('STD ', "%.3f" % s1, "%.3f" % s2, "%.3f" % s3, tipo, gender, legendaMen)
-    print('VARIANCE ', "%.3f" % vr1, "%.3f" % vr2, "%.3f" % vr3, tipo, gender, legendaMen)
+    # print('MEDIAN ', "%.3f" % m1, "%.3f" % m2, "%.3f" % m3, tipo, gender, legendaMen)
+    # print('STD ', "%.3f" % s1, "%.3f" % s2, "%.3f" % s3, tipo, gender, legendaMen)
+    # print('VARIANCE ', "%.3f" % vr1, "%.3f" % vr2, "%.3f" % vr3, tipo, gender, legendaMen)
     
     CTEs = [m1,m2,m3,m4]
     error = [s1,s2,s3,s4]
@@ -273,7 +338,7 @@ def getHappiness(total, legendaMen, tipo, gender):
     # STD  0.539 0.404 0.531 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
     # VARIANCE  0.291 0.163 0.282 AU6+AU12 Women ['CDFWomen', 'CGWomen', 'SpontWomen']
 
-    return 'ok'
+    return [m1,m2,m3,m4], [vr1,vr2,vr3,vr4], [s1,s2,s3,s4]
 
 def boxPlotChart(au6,au12,auConj,imgDataset):
     

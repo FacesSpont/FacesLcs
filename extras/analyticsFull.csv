@@ -1,0 +1,25 @@
+Dataset;Genero;AU;Mediana;Desvio Padrao;Variancia
+CG - Men;Men;AU6;1.690;1.489;2.216
+CGGames - Men;Men;AU6;0.000;0.753;0.567
+Posed - Men;Men;AU6;1.830;0.934;0.872
+Spont - Men;Men;AU6;1.565;1.294;1.675
+CG - Men;Men;AU12;1.300;0.686;0.470
+CGGames - Men;Men;AU12;1.300;0.549;0.302
+Posed - Men;Men;AU12;1.410;0.667;0.446
+Spont - Men;Men;AU12;1.845;0.947;0.896
+CG - Women;Women;AU6;0.105;0.472;0.223
+CGGames - Women;Women;AU6;0.380;0.327;0.107
+Posed - Women;Women;AU6;1.770;0.826;0.682
+Spont - Women;Women;AU6;0.815;0.963;0.927
+CG - Women;Women;AU12;1.485;0.557;0.310
+CGGames - Women;Women;AU12;1.400;0.495;0.245
+Posed - Women;Women;AU12;1.780;0.694;0.482
+Spont - Women;Women;AU12;1.440;0.538;0.289
+CG - Women;Men;AU6+AU12;1.000;0.852;0.726
+CGGames - Women;Men;AU6+AU12;0.500;0.471;0.222
+Posed - Women;Men;AU6+AU12;1.000;0.621;0.385
+Spont - Women;Men;AU6+AU12;1.000;0.716;0.512
+CG - Women;Women;AU6+AU12;0.500;0.404;0.163
+CGGames - Women;Women;AU6+AU12;0.500;0.317;0.100
+Posed - Women;Women;AU6+AU12;1.500;0.539;0.291
+Spont - Women;Women;AU6+AU12;1.000;0.531;0.282

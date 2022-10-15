@@ -211,8 +211,6 @@ def getHappiness(au6, au7, au12, au25, au26, auConj, imgDataset):
     plt.clf()
     plt.close()    
 
-    return 'ok'
-
 def boxPlotChart(au6,au12,auConj,imgDataset):
     
     box_plot_data=[au6,au12,auConj]
