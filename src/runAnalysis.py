@@ -1,4 +1,5 @@
 
+from statistics import stdev
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -19,7 +20,7 @@ def runFiles():
             writer = csv.writer(arquivo, delimiter=';')
 
             ## Add Header infos
-            header = ['image','AU01','AU02','AU04','AU05','AU06','AU07','AU09','AU10','AU12','AU14','AU15','AU17','AU20','AU23','AU25','AU26','AU45', 'SUM']
+            header = ['Image','AU01','AU02','AU04','AU05','AU06','AU07','AU09','AU10','AU12','AU14','AU15','AU17','AU20','AU23','AU25','AU26','AU45', 'SUM', 'STD']
             writer.writerow(header)
 
             fileEnt = os.listdir('data/happiness/' + ent)
@@ -31,11 +32,14 @@ def runFiles():
 
                 soma = sum(dataComp.iloc[:, 676:693].values[0])
                 soma = "%.3f" % float(soma)
+                desv = stdev(dataComp.iloc[:, 676:693].values[0])
+                desv = "%.3f" % float(desv)
 
                 name = fEnt.split('.')[0]
 
                 lista.insert(0, name)
                 lista.append(soma)
+                lista.append(desv)
                 
                 valores = lista
                 writer.writerow(valores)
@@ -48,3 +52,5 @@ def runFiles():
 if __name__ == '__main__':
 
     runFiles()
+
+    ## github procurar modelo q gere as AU e suas intensidades para verificar personagens CG
